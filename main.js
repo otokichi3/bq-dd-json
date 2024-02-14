@@ -1,6 +1,6 @@
 function onOpen() {
   var ui = SpreadsheetApp.getUi();
-  var menu = ui.createMenu("関数");
+  var menu = ui.createMenu("BigQuery");
   menu.addItem("JSONスキーマ出力", "outputJsonSchema");
   menu.addToUi();
 }
