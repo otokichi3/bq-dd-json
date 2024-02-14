@@ -49,7 +49,7 @@ function getJson(lines, parentCol = "") {
   let json = [];
   let fields = null;
   let i = 0;
-  while(i < lines.length) {
+  while (i < lines.length) {
     if (lines[i].en.indexOf(parentCol) === -1) {
       break;
     }
