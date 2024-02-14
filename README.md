@@ -1,7 +1,8 @@
 # Data Definition to BigQuery by GAS
 
-作成した BigQuery テーブル定義書から JSON 形式のスキーマを出力するための GAS です。
-GAS で出力するためにフォーマットされたテーブル定義書からしか出力できませんので、テーブル定義には以下を使ってください。
+作成した BigQuery テーブル定義書から JSON 形式のスキーマを出力するための GAS です。  
+GAS で出力するためにフォーマットされたテーブル定義書からしか出力できません。  
+テーブル定義には以下を使ってください。  
 https://docs.google.com/spreadsheets/d/1pN5Tqr0tBsBlpChJ7qT27z1GCuTBCyWuBztVfLfoGrU/edit?usp=sharing
 
 ## Clasp を使って GAS のコードをデプロイしたり Git/GitHub で管理するには？
