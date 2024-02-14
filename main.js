@@ -24,13 +24,15 @@ function getLines() {
     let en = sheet.getRange(i, 4).getValue();
     // Type
     let type = sheet.getRange(i, 5).getValue();
+    // Max Length
+    let ml = sheet.getRange(i, 6).getValue();
     // Mode
-    let mode = sheet.getRange(i, 6).getValue();
-    // Description
-    let desc = sheet.getRange(i, 7).getValue();
+    let mode = sheet.getRange(i, 7).getValue();
+    // Default Value
+    let dv = sheet.getRange(i, 8).getValue();
 
     // すべて空の場合は終了
-    if (!jp && !en && !type && !mode && !desc) {
+    if (!jp && !en && !type && !ml && !mode && !desc && !dv) {
       break;
     }
 
@@ -38,8 +40,9 @@ function getLines() {
       jp: jp,
       en: en,
       type: type,
+      ml: ml,
       mode: mode,
-      desc: desc,
+      dv: dv,
     });
   }
   return lines;
@@ -56,18 +59,20 @@ function getJson(lines, parentCol = "") {
     if (lines[i].type === "RECORD") {
       fields = getJson(lines.slice(i + 1), lines[i].en + ".");
       json.push({
-        description: lines[i].desc,
         name: lines[i].en.replace(parentCol, ""),
         type: lines[i].type,
+        ml: lines[i].ml,
+        defaultValueExpression: lines[i].dv,
         mode: lines[i].mode,
         fields: fields,
       });
       i += getChildCount(lines.slice(i + 1), lines[i].en);
     } else {
       json.push({
-        description: lines[i].desc,
         name: lines[i].en.replace(parentCol, ""),
         type: lines[i].type,
+        ml: lines[i].ml,
+        defaultValueExpression: lines[i].dv,
         mode: lines[i].mode,
       });
     }
