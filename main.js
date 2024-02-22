@@ -14,7 +14,7 @@ function outputJsonSchema() {
 function getLines() {
   const sheet = SpreadsheetApp.getActiveSheet();
   const lastRow = sheet.getLastRow();
-  const bodyRowNum = 8;
+  const bodyRowNum = 9;
   let lines = Array();
   // lines に全データを格納
   for (let i = bodyRowNum; i <= lastRow; i++) {
@@ -25,14 +25,14 @@ function getLines() {
     // Type
     let type = sheet.getRange(i, 5).getValue();
     // Max Length
-    let ml = sheet.getRange(i, 6).getValue();
+    let max_length = sheet.getRange(i, 6).getValue();
     // Mode
     let mode = sheet.getRange(i, 7).getValue();
-    // Default Value
-    let dv = sheet.getRange(i, 8).getValue();
+    // Default Value Expression
+    let dve = sheet.getRange(i, 8).getValue();
 
     // すべて空の場合は終了
-    if (!jp && !en && !type && !ml && !mode && !desc && !dv) {
+    if (!jp && !en && !type && !max_length && !mode && !dve) {
       break;
     }
 
@@ -40,9 +40,9 @@ function getLines() {
       jp: jp,
       en: en,
       type: type,
-      ml: ml,
+      max_length: max_length,
       mode: mode,
-      dv: dv,
+      dve: dve,
     });
   }
   return lines;
@@ -61,8 +61,8 @@ function getJson(lines, parentCol = "") {
       json.push({
         name: lines[i].en.replace(parentCol, ""),
         type: lines[i].type,
-        ml: lines[i].ml,
-        defaultValueExpression: lines[i].dv,
+        // maxLength: lines[i].max_length, // TODO ERROR if empty 
+        // defaultValueExpression: lines[i].dve, // TODO ERROR if empty 
         mode: lines[i].mode,
         fields: fields,
       });
@@ -71,8 +71,8 @@ function getJson(lines, parentCol = "") {
       json.push({
         name: lines[i].en.replace(parentCol, ""),
         type: lines[i].type,
-        ml: lines[i].ml,
-        defaultValueExpression: lines[i].dv,
+        // maxLength: lines[i].max_length, // TODO ERROR if empty 
+        // defaultValueExpression: lines[i].dve, // TODO ERROR if empty 
         mode: lines[i].mode,
       });
     }
